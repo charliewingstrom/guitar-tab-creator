@@ -3,12 +3,13 @@
 class TabbedSong
 {
 public:
-	TabbedSong() = default;
+	TabbedSong();
 	TabbedSong(const TabbedSong& other) = delete;
-	~TabbedSong() = default;
+	~TabbedSong();
 
+	void AddPieceToSong(TabPiece* piece);
 public:
-	TabPiece* LowEhead;
+	TabPiece* LowEHead;
 	TabPiece* AHead;
 	TabPiece* DHead;
 	TabPiece* GHead;
