@@ -13,7 +13,8 @@ public:
 public:
 	Note* getNoteAt(int stringNo, int fretNo);
 	void getNotePosition(int& stringNo, int& fretNo, Note* note);
-	void getNotePositionInRange(int& stringNo, int& fretNo, Note* note, int lowerRange, int higherRange);
+	// returns true if note was found
+	bool getNotePositionInRange(int& stringNo, int& fretNo, Note* note, int lowerRange, int higherRange);
 
 private:
 	Note LowEString[22] = {

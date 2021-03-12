@@ -27,6 +27,9 @@ int main() {
 	int stringNo;
 	int fretNo;
 
+	int upperLimit;
+	int lowerLimit;
+	int prevFret = 9;
 	int beat = 0;
 
 	file.open(inFilename.c_str());
@@ -44,7 +47,17 @@ int main() {
 
 		int oct = stoi(octave);
 		tmpNote = new Note(noteLetter, oct);
-		f->getNotePositionInRange(stringNo, fretNo, tmpNote, 5, 13);
+		
+		upperLimit = prevFret;
+		lowerLimit = prevFret;
+
+		while (!f->getNotePositionInRange(stringNo, fretNo, tmpNote, lowerLimit, upperLimit))
+		{
+			if (upperLimit < 22)
+				upperLimit++;
+			if (lowerLimit > 0)
+				lowerLimit--;
+		}
 
 		printf("string number: %d\n", stringNo);
 		printf("fret number: %d\n", fretNo);
@@ -55,6 +68,7 @@ int main() {
 
 		delete tmpNote;
 		beat += 8;
+		prevFret = fretNo;
 	}
 	
 

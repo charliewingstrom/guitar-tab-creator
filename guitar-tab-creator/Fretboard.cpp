@@ -42,7 +42,7 @@ void Fretboard::getNotePosition(int& stringNo, int& fretNo, Note* note)
 	}
 }
 
-void Fretboard::getNotePositionInRange(int& stringNo, int& fretNo, Note* note, int lowerRange, int higherRange)
+bool Fretboard::getNotePositionInRange(int& stringNo, int& fretNo, Note* note, int lowerRange, int higherRange)
 {
 	if (lowerRange >= 0 && higherRange <= NumFrets)
 	{
@@ -55,9 +55,10 @@ void Fretboard::getNotePositionInRange(int& stringNo, int& fretNo, Note* note, i
 					//printf("Note found in get note position\n");
 					stringNo = i;
 					fretNo = j;
-					return;
+					return true;
 				}
 			}
 		}
 	}
+	return false;
 }
