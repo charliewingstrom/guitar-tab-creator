@@ -11,7 +11,6 @@ Note::~Note()
 {
 }
 
-
 Note::Note(const char* letter, int octave)
 {
 	this->Letter = letter;

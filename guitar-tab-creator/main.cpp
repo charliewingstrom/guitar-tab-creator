@@ -23,6 +23,7 @@ int main() {
 
 	char* noteLetter = new char[2];
 	char* octave = new char;
+	char* noteBeat = new char[2];
 
 	int stringNo;
 	int fretNo;
@@ -31,7 +32,7 @@ int main() {
 	int lowerLimit;
 	int prevFret = 9;
 	int beat = 0;
-
+	int currNoteBeat;
 	file.open(inFilename.c_str());
 	outfile.open(outFilename.c_str());
 	
@@ -42,10 +43,12 @@ int main() {
 	{
 		printf("------------------- NOTE -----------------------\n");
 		file >> octave;
+		file >> noteBeat;
 		printf("noteLetter: %s\n", noteLetter);
 		printf("noteOctave: %s\n", octave);
-
+		printf("noteBeat: %s\n", noteBeat);
 		int oct = stoi(octave);
+		currNoteBeat = stoi(noteBeat);
 		tmpNote = new Note(noteLetter, oct);
 		
 		upperLimit = prevFret;
@@ -67,7 +70,7 @@ int main() {
 		song->AddPieceToSong(tmpPiece);
 
 		delete tmpNote;
-		beat += 8;
+		beat += currNoteBeat*2;
 		prevFret = fretNo;
 	}
 	
@@ -76,16 +79,23 @@ int main() {
 	TabPiece* tmp;
 
 	int tmpBeat;
-	int maxBeat = 256;
+	int beatTo;
+	int maxBeat = 512;
+
+
 	TabPiece* heads[6] = { song->HighEHead, song->BHead, song->GHead, song->DHead, song->AHead, song->LowEHead };
 	for (int i = 0; i < 6; i++)
 	{
 		tmp = heads[i];
-
 		tmpBeat = 0;
+		outfile << "|----";
 		while (tmp != nullptr)
 		{
-			for (int i = tmpBeat; i < tmp->Beat-2; i++)
+			if (tmp->Fret > 9)
+				beatTo = tmp->Beat - 1;
+			else
+				beatTo = tmp->Beat - 2;
+			for (int i = tmpBeat; i < beatTo; i++)
 			{
 				outfile << "-";
 			}
@@ -95,9 +105,7 @@ int main() {
 		}
 		// making tab look clean at the end
 		for (int i = tmpBeat; i < maxBeat; i++)
-		{
 			outfile << "-";
-		}
 		outfile << "\n";
 	}
 	
