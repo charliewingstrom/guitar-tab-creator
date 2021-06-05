@@ -21,9 +21,9 @@ int main() {
 	string inFilename = "input.txt";
 	string outFilename = "output.txt";
 
-	char* noteLetter = new char[2];
-	char* octave = new char;
-	char* noteBeat = new char[2];
+	string noteLetter;
+	string octave;
+	string noteBeat;
 
 	int stringNo;
 	int fretNo;
@@ -44,9 +44,9 @@ int main() {
 		printf("------------------- NOTE -----------------------\n");
 		file >> octave;
 		file >> noteBeat;
-		printf("noteLetter: %s\n", noteLetter);
-		printf("noteOctave: %s\n", octave);
-		printf("noteBeat: %s\n", noteBeat);
+		cout << "noteLetter: " << noteLetter << '\n';
+		cout << "noteOctave: " << octave << '\n';
+		cout << "noteBeat: " << noteBeat << '\n';
 		int oct = stoi(octave);
 		currNoteBeat = stoi(noteBeat);
 		tmpNote = new Note(noteLetter, oct);
@@ -95,9 +95,9 @@ int main() {
 				beatTo = tmp->Beat - 1;
 			else
 				beatTo = tmp->Beat - 2;
-			for (int i = tmpBeat; i < beatTo; i++)
+			for (int i = tmpBeat; i < beatTo; i+=4)
 			{
-				outfile << "-";
+				outfile << "-\t";
 			}
 			outfile << to_string(tmp->Fret);
 			tmpBeat = tmp->Beat;

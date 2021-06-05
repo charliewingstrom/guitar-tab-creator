@@ -11,13 +11,13 @@ Note::~Note()
 {
 }
 
-Note::Note(const char* letter, int octave)
+Note::Note(string letter, int octave)
 {
 	this->Letter = letter;
 	this->Octave = octave;
 }
 
-const char* Note::GetLetter()
+string Note::GetLetter()
 {
 	return Letter;
 }
@@ -29,7 +29,7 @@ int Note::GetOctave()
 
 bool Note::Equals(const Note* other)
 {
-	return strcmp(Letter, other->Letter) == 0 && Octave == other->Octave;
+	return Letter == other->Letter && Octave == other->Octave;
 }
 
 

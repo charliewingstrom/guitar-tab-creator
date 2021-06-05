@@ -7,14 +7,14 @@ public:
 	Note() = delete;
 	Note operator=(const Note& other);
 	~Note();
-	Note(const char* letter, int octave);
+	Note(string letter, int octave);
 
 private:
-	const char* Letter;
+	string Letter;
 	int Octave;
 
 public:
-	const char* GetLetter();
+	string GetLetter();
 	int GetOctave();
 	bool Equals(const Note* other);
 
