@@ -6,7 +6,7 @@ class Fretboard
 public:
 	// big 4
 	Fretboard();
-	Fretboard& operator=(const Fretboard& other);
+	Fretboard& operator=(const Fretboard& other) = delete;
 	Fretboard(const Fretboard& other);
 	~Fretboard();
 

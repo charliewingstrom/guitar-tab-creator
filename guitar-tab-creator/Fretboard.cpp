@@ -4,12 +4,7 @@ Fretboard::Fretboard()
 {
 }
 
-Fretboard& Fretboard::operator=(const Fretboard& other)
-{
-	// TODO: insert return statement here
-	Fretboard* tmp = new Fretboard();
-	return *tmp;
-}
+
 
 Fretboard::Fretboard(const Fretboard& other)
 {

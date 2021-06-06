@@ -5,7 +5,7 @@ class Note
 {
 public:
 	Note() = delete;
-	Note operator=(const Note& other);
+	Note operator=(const Note& other) = delete;
 	~Note();
 	Note(string letter, int octave);
 

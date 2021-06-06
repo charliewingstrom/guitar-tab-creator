@@ -1,7 +1,10 @@
+
+#include <cstdlib>
+#include <crtdbg.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
-
 #include "Fretboard.h"
 #include "TabbedSong.h"
 
@@ -118,4 +121,8 @@ int main() {
 
 	delete f;
 	delete song;
+
+	_CrtDumpMemoryLeaks();
+
+	return 0;
 }

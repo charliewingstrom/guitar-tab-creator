@@ -1,11 +1,6 @@
 #include "Note.h"
 
-Note Note::operator=(const Note& other)
-{
-	Note* tmp = new Note(other.Letter, other.Octave);
-	
-	return *tmp;
-}
+
 
 Note::~Note()
 {
