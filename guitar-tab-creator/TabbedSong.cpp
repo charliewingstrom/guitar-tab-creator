@@ -1,5 +1,7 @@
 #include "TabbedSong.h"
 
+
+
 TabbedSong::TabbedSong()
 {
 	LowEHead = nullptr;
@@ -11,47 +13,29 @@ TabbedSong::TabbedSong()
 
 }
 
-TabbedSong::~TabbedSong()
+void deleteLinkedList(TabPiece* head)
 {
 	TabPiece* tmpTab;
-	while (LowEHead != nullptr)
+	while (head != nullptr)
 	{
-		tmpTab = LowEHead;
-		LowEHead = LowEHead->next;
+		tmpTab = head;
+		head = head->next;
 		delete tmpTab;
 	}
-	while (AHead != nullptr)
-	{
-		tmpTab = AHead;
-		AHead = AHead->next;
-		delete tmpTab;
-	}
-	while (DHead != nullptr)
-	{
-		tmpTab = DHead;
-		DHead = DHead->next;
-		delete tmpTab;
-	}
-	while (GHead != nullptr)
-	{
-		tmpTab = GHead;
-		GHead = GHead->next;
-		delete tmpTab;
-	}
-	while (BHead != nullptr)
-	{
-		tmpTab = BHead;
-		BHead = BHead->next;
-		delete tmpTab;
-	}
-	while (HighEHead != nullptr)
-	{
-		tmpTab = HighEHead;
-		HighEHead = HighEHead->next;
-		delete tmpTab;
-	}
+}
+
+TabbedSong::~TabbedSong()
+{
+	deleteLinkedList(LowEHead);
+	deleteLinkedList(AHead);
+	deleteLinkedList(DHead);
+	deleteLinkedList(GHead);
+	deleteLinkedList(BHead);
+	deleteLinkedList(HighEHead);
 
 }
+
+
 
 void TabbedSong::AddPieceToSong(TabPiece* piece)
 {

@@ -1,17 +1,27 @@
-
-#include <cstdlib>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
 #include <crtdbg.h>
-
 #include <iostream>
 #include <fstream>
 #include <string>
 #include "Fretboard.h"
 #include "TabbedSong.h"
 
+#ifdef _DEBUG
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#else
+#define DBG_NEW new
+#endif
+
+
 using namespace std;
 
 
 int main() {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	cout << "Welcome to guitar tab creator" << endl;
 
 	Fretboard* f = new Fretboard();
@@ -52,12 +62,12 @@ int main() {
 		cout << "noteBeat: " << noteBeat << '\n';
 		int oct = stoi(octave);
 		currNoteBeat = stoi(noteBeat);
-		tmpNote = new Note(noteLetter, oct);
+		Note tmpNote(noteLetter, oct);
 		
 		upperLimit = prevFret;
 		lowerLimit = prevFret;
 
-		while (!f->getNotePositionInRange(stringNo, fretNo, tmpNote, lowerLimit, upperLimit))
+		while (!f->getNotePositionInRange(stringNo, fretNo, &tmpNote, lowerLimit, upperLimit))
 		{
 			if (upperLimit < 22)
 				upperLimit++;
@@ -72,7 +82,7 @@ int main() {
 
 		song->AddPieceToSong(tmpPiece);
 
-		delete tmpNote;
+
 		beat += currNoteBeat*2;
 		prevFret = fretNo;
 	}
